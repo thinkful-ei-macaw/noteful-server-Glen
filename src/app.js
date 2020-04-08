@@ -14,23 +14,6 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-
-// set up middleware
-app.use(morgan(morganOption));
-app.use(helmet());
-app.use(cors());
-app.use(validateBearerToken);
-
-app.use('/api/folders', foldersRouter);
-app.use('/api/notes', notesRouter);
-
-// request handling
-app.get('/', (req, res) => {
-  res.status(200).send('Hello, world!');
-});
-
-// error handling
-// eslint-disable-next-line no-unused-vars
 const errorHandler = (error, req, res, next) => {
   let response;
   if (NODE_ENV === 'production') {
@@ -43,6 +26,27 @@ const errorHandler = (error, req, res, next) => {
 };
 
 app.use(errorHandler);
+
+app.get('/', (req, res) => {
+  res.status(200).send('Hello, world!');
+});
+
+
+// set up middleware
+app.use(morgan(morganOption));
+app.use(helmet());
+app.use(cors());
+app.use(validateBearerToken);
+
+app.use('/api/folders', foldersRouter);
+app.use('/api/notes', notesRouter);
+
+// request handling
+
+
+// error handling
+// eslint-disable-next-line no-unused-vars
+
 
 
 // the bottom line, literally

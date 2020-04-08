@@ -1,4 +1,7 @@
 const app = require('../src/app');
+const validateBearerToken = require('../src/validateBearerToken')
+
+
 
 describe('App', () => {
 
